@@ -9,6 +9,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.example.littlelemon.ui.theme.LittleLemonTheme
 
 class MainActivity : ComponentActivity() {
@@ -32,7 +35,20 @@ private fun AppScreen() {
                 .fillMaxSize()
                 .padding(it)
         ) {
+            navigation()
+        }
+    }
+}
 
+@Composable
+fun navigation() {
+    val navController = rememberNavController()
+    NavHost(navController = navController, startDestination = Home.route) {
+        composable(Home.route) {
+            HomeScreen(navController = navController)
+        }
+        composable(Menu.route) {
+            MenuListScreen()
         }
     }
 }
